@@ -1,4 +1,4 @@
-//trie.cpp
+// divideAndSum.cpp
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -18,60 +18,25 @@ using namespace std;
 #define PNF(a,n,m) for(int i=0;i<n;i++){for(int j=0;j<m;j++){cout<<a[i][j]<<' ';}cout<<endl;}cout<<endl;
 #define PNF1(a,n,m) for(int i=1;i<=n;i++){for(int j=1;j<=m;j++){cout<<a[i][j]<<' ';}cout<<endl;}cout<<endl;
 #define AS 200001
-#define mod 1000000007
+#define mod 998244353
 
-class node{
-
-	public:
-	char ch;
-	unordered_map<char,node*> h;
-	bool isTerminal;
-	node(char c){
-		ch = c;
-		isTerminal = false; 
-	}
-
-};
-
-class trie{
-	node *root;
-public:
-	trie(){
-		root = new node('\0');
-	}
-
-	void insert(char *word){
-		node *temp = root;
-		for(int i=0;word[i]!='\0';i++){
-			char ch = word[i];
-			// LETTER exist
-			if(temp->h.count(ch)){
-				temp = temp->h[ch];
-			}
-			else{
-				temp->h[ch]= new node(ch);
-				temp = temp->h[ch];
-
-			}
-		}
-		temp->isTerminal = true;
-	}
-
-	bool search(char *word){
-		node *temp = root;
-		for(int i=0;word[i]!='\0';i++){
-			char ch  = word[i];
-			if(temp->h.count(ch)){
-				temp = temp->h[ch];
-			}
-			else{
-				return false;
-			}
-		}
-		return temp->isTerminal;
-	}
-
-};
+ll binomialCoeff(ll n, ll k) 
+{ 
+    ll res = 1; 
+  
+    // Since C(n, k) = C(n, n-k) 
+    if (k > n - k) 
+        k = n - k; 
+  
+    // Calculate value of 
+    // [n * (n-1) *---* (n-k+1)] / [k * (k-1) *----* 1] 
+    for (ll i = 0; i < k; ++i) { 
+        res = (res*(n - i))%mod; 
+        res = (res/(i + 1))%mod; 
+    } 
+  	res = (res+mod)%mod;
+    return res; 
+} 
 
 int main(){
 	
@@ -82,24 +47,30 @@ int main(){
 	freopen("output.txt","w",stdout);
 	#endif
 
-	trie t;
+	ll n,t;
+	cin>>n;
+	t=n;
+	n = 2*n;
+	ll a[300005];
+	F(a,n);
+	sort(a,a+n);
 
-	char words[][10] = {
-		"Hello",
-		"Hell",
-		"Coding",
-		"Code"
-	};
+	ll sum = 0;
 
-	for(int i=0;i<4;i++){
-		t.insert(words[i]);
+
+	for(ll i=0;i<n;i++){
+		
+		if(i>=t){
+			sum = (sum + a[i])%mod;
+		
+		}
+		else{
+			sum = (sum  - a[i])%mod;
+		}
 	}
-
-	cout<<t.search("Coding");
-	cout<<t.search("Hell");
-	cout<<t.search("hell");
-	
-
+	sum = (sum * binomialCoeff(n-1,t))%mod;
+	sum = (sum*2)%mod;
+	cout<<sum%mod;
 
 	return 0;
 }

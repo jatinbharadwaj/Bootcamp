@@ -1,4 +1,4 @@
-//trie.cpp
+// division.cpp
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -20,59 +20,6 @@ using namespace std;
 #define AS 200001
 #define mod 1000000007
 
-class node{
-
-	public:
-	char ch;
-	unordered_map<char,node*> h;
-	bool isTerminal;
-	node(char c){
-		ch = c;
-		isTerminal = false; 
-	}
-
-};
-
-class trie{
-	node *root;
-public:
-	trie(){
-		root = new node('\0');
-	}
-
-	void insert(char *word){
-		node *temp = root;
-		for(int i=0;word[i]!='\0';i++){
-			char ch = word[i];
-			// LETTER exist
-			if(temp->h.count(ch)){
-				temp = temp->h[ch];
-			}
-			else{
-				temp->h[ch]= new node(ch);
-				temp = temp->h[ch];
-
-			}
-		}
-		temp->isTerminal = true;
-	}
-
-	bool search(char *word){
-		node *temp = root;
-		for(int i=0;word[i]!='\0';i++){
-			char ch  = word[i];
-			if(temp->h.count(ch)){
-				temp = temp->h[ch];
-			}
-			else{
-				return false;
-			}
-		}
-		return temp->isTerminal;
-	}
-
-};
-
 int main(){
 	
 	fastIO
@@ -82,24 +29,26 @@ int main(){
 	freopen("output.txt","w",stdout);
 	#endif
 
-	trie t;
+	int t;
+	cin>>t;
 
-	char words[][10] = {
-		"Hello",
-		"Hell",
-		"Coding",
-		"Code"
-	};
+	while(t--){
+		ll a,b,ans=a,k=2;
 
-	for(int i=0;i<4;i++){
-		t.insert(words[i]);
+		cin>>a>>b;
+		 if(a<b || a%b != 0){
+		 	ans = a;
+		 }
+
+		 else{
+		 	
+		 	if()
+
+		 }
+
+
 	}
-
-	cout<<t.search("Coding");
-	cout<<t.search("Hell");
-	cout<<t.search("hell");
-	
-
 
 	return 0;
 }
+

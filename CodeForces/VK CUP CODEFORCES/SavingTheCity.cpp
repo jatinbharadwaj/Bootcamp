@@ -1,4 +1,4 @@
-//trie.cpp
+// SavingTheCity.cpp
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -20,59 +20,6 @@ using namespace std;
 #define AS 200001
 #define mod 1000000007
 
-class node{
-
-	public:
-	char ch;
-	unordered_map<char,node*> h;
-	bool isTerminal;
-	node(char c){
-		ch = c;
-		isTerminal = false; 
-	}
-
-};
-
-class trie{
-	node *root;
-public:
-	trie(){
-		root = new node('\0');
-	}
-
-	void insert(char *word){
-		node *temp = root;
-		for(int i=0;word[i]!='\0';i++){
-			char ch = word[i];
-			// LETTER exist
-			if(temp->h.count(ch)){
-				temp = temp->h[ch];
-			}
-			else{
-				temp->h[ch]= new node(ch);
-				temp = temp->h[ch];
-
-			}
-		}
-		temp->isTerminal = true;
-	}
-
-	bool search(char *word){
-		node *temp = root;
-		for(int i=0;word[i]!='\0';i++){
-			char ch  = word[i];
-			if(temp->h.count(ch)){
-				temp = temp->h[ch];
-			}
-			else{
-				return false;
-			}
-		}
-		return temp->isTerminal;
-	}
-
-};
-
 int main(){
 	
 	fastIO
@@ -82,23 +29,46 @@ int main(){
 	freopen("output.txt","w",stdout);
 	#endif
 
-	trie t;
 
-	char words[][10] = {
-		"Hello",
-		"Hell",
-		"Coding",
-		"Code"
-	};
+	int t;
+	cin>>t;
+	while(t--){
+		int a,b;
+		cin>>a>>b;
 
-	for(int i=0;i<4;i++){
-		t.insert(words[i]);
+		string s;
+		cin>>s;
+		int i=0;
+		int activate=0, place = INT_MAX, total=0;
+		bool activated=false;
+		while(s[i]!='1' && i<s.length()){
+			i++;
+		}
+		if(i!=s.length())
+			total += a; i++;
+		while(i<s.length()){
+			
+			if (s[i]=='1'){
+				while(s[i]=='1') i++;				
+			}
+			else if( s[i]=='0'){
+				place = 0;
+				while(s[i]=='0'){
+					place += b;
+					i++;
+				}				
+			}
+
+			if(i>0 && s[i]=='1' && s[i-1]=='0')
+			{ 
+				total += min(a,place);
+				i++;
+			}
+				
+		}
+		cout<<total<<endl;
+			
 	}
-
-	cout<<t.search("Coding");
-	cout<<t.search("Hell");
-	cout<<t.search("hell");
-	
 
 
 	return 0;
