@@ -1,4 +1,5 @@
-// ChooseMe.cpp
+// practice.cpp
+
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -20,42 +21,27 @@ using namespace std;
 #define AS 200001
 #define mod 1000000007
 
+void solve(int a){
+
+	if(a==0){
+		return;
+	}
+
+	
+	solve(a-1);
+	cout<<a;
+}
+
 int main(){
 	
 	fastIO
 
-	#ifndef ONLINE_JUDGE
-	freopen("input.txt","r",stdin);
-	freopen("output.txt","w",stdout);
-	#endif
+	// #ifndef ONLINE_JUDGE
+	// freopen("input.txt","r",stdin);
+	// freopen("output.txt","w",stdout);
+	// #endif
 
-	int n;
-	cin>>n;
-	vector<pair<ll,ll>> v;
-
-	ll sum = 0;
-	for(int i=0;i<n;i++){
-		ll a,b;	
-		cin>>a>>b;
-		sum+=a;
-		v.pb({-2*(a+b),a});	
-
-	}
-
-	sort(v.begin(),v.end());
-
-	ll ans = 0, asum= 0, i=0;
-	while(sum>=asum && i<v.size()){
-		ll k = -(v[i].fi);
-		asum += k;
-		sum -= v[i].si;
-		i++;
-		ans++;
-		// cout<<sum<<" "<<asum<<endl;
-	}
-
-	cout<<ans;
+	solve(8);
 
 	return 0;
 }
-	
