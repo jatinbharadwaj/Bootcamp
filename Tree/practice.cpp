@@ -1,47 +1,89 @@
-// practice.cpp
+#include<iostream>
+#include<queue>
 
-#include<bits/stdc++.h>
+#define fastIO ios_base::sync_with_stdio(false); cin.tie(NULL);
+
 using namespace std;
 
-#define ll long long int
-#define mp make_pair
-#define pb push_back
-#define ppi pair<ll,ll>
-#define fi first
-#define si second
-#define fastIO ios_base::sync_with_stdio(false); cin.tie(NULL);
-#define F(a,n) for(int i=0;i<n;i++){cin>>a[i];}
-#define F1(a,n) for(int i=1;i<=n;i++){cin>>a[i];}
-#define P(a,n) for(int i=0;i<n;i++){cout<<a[i]<<' ';}cout<<endl;
-#define P1(a,n) for(int i=1;i<=n;i++){cout<<a[i]<<' ';}cout<<endl;
-#define NF(a,n,m) for(int i=0;i<n;i++){for(int j=0;j<m;j++){cin>>a[i][j];}}
-#define NF1(a,n,m) for(int i=1;i<=n;i++){for(int j=1;j<=m;j++){cin>>a[i][j];}}
-#define PNF(a,n,m) for(int i=0;i<n;i++){for(int j=0;j<m;j++){cout<<a[i][j]<<' ';}cout<<endl;}cout<<endl;
-#define PNF1(a,n,m) for(int i=1;i<=n;i++){for(int j=1;j<=m;j++){cout<<a[i][j]<<' ';}cout<<endl;}cout<<endl;
-#define AS 200001
-#define mod 1000000007
-
-void solve(int a){
-
-	if(a==0){
-		return;
-	}
+class node{
 
 	
-	solve(a-1);
-	cout<<a;
+public:
+	int val;
+	node *left=NULL;
+	node *right=NULL;
+
+	node(int d):val(d),left(NULL),right(NULL){}
+
+};
+
+node* makeTree(){
+	int d;	
+	cin>>d;
+
+	if(d==-1) return NULL;
+
+	else{
+		node* n = new node(d);
+		n->left = makeTree();
+		n->right = makeTree();
+		return n;
+	}
+
+}
+
+void preorder(node* root){
+	if(root==NULL){
+		return ;
+	}
+
+	cout<<root->val<<" ";
+	preorder(root->left);
+	preorder(root->right);
+}
+void Inorder(node* root){
+	if(root==NULL){
+		return ;
+	}
+
+	Inorder(root->left);
+	cout<<root->val<<" ";
+	Inorder(root->right);
+}
+
+void postorder(node *root){
+	if(root==NULL){
+		return;
+	}
+	postorder(root->left);
+	postorder(root->right);
+	cout<<root->val<<" ";
+
 }
 
 int main(){
-	
+		
 	fastIO
 
-	// #ifndef ONLINE_JUDGE
-	// freopen("input.txt","r",stdin);
-	// freopen("output.txt","w",stdout);
-	// #endif
+	#ifndef ONLINE_JUDGE
+	freopen("input.txt","r",stdin);
+	freopen("output.txt","w",stdout);
+	#endif
 
-	solve(8);
+	int pre[] = {1,2,4,5,3,7,6,8};
+	int in[] = {4,5,2,1,7,3,8,6};
+
+	node* root = makeTree();
+
+	preorder(root);
+	cout<<endl;
+	Inorder(root);
+	cout<<endl;
+	postorder(root);
+	cout<<endl;
+
 
 	return 0;
+
 }
+
