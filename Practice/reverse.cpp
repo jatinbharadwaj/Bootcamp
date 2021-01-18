@@ -1,4 +1,4 @@
-// subsets.cpp
+// reverse.cpp
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -20,22 +20,6 @@ using namespace std;
 #define AS 200001
 #define mod 1000000007
 
-set<string> ans;
-void subsets(string s,int i,string v){
-	if(i==s.length()){
-		ans.insert(v);
-		return;
-	}
-
-
-	for(int j=i;s[j];j++){
-		v+=s[i];
-		subsets(s,i,v);
-		v = v.erase(v.size()-1);
-	}
-	return ;
-}
-
 int main() {
 
 	fastIO
@@ -45,19 +29,28 @@ int main() {
 	freopen("output.txt", "w", stdout);
 #endif
 
-	//	int t;
-	//	cin>>t;
+	int t;
+	cin >> t;
 
-	// while(t--){
+	while (t--) {
 
-	//	}
+		int n,k;
+		cin>>n>>k;
+		k%=n;
+		std::vector<int> a(n);
 
-	string s = "ABC";
+		F(a,n)
 
-	subsets(s,0,"");
+		reverse(a.begin(),a.end());
+		reverse(a.begin(),a.end()-n+k);
+		reverse(a.begin()+k,a.end());
 
-	for(auto i:ans) cout<<i;
+		P(a,n)
 
-		return 0;
+	}
+
+
+
+	return 0;
 }
 
