@@ -1,8 +1,6 @@
-// MonkInversion.cpp
+// CyclicShift.cpp
 #include<bits/stdc++.h>
 using namespace std;
-
-// Brute force 
 
 #define ll long long int
 #define mp make_pair
@@ -22,9 +20,6 @@ using namespace std;
 #define AS 200001
 #define mod 1000000007
 
-int a[21][21];
-
-
 int main() {
 
 	fastIO
@@ -38,32 +33,38 @@ int main() {
 	cin >> t;
 
 	while (t--) {
-		int n;
-		cin>>n;
 
-		NF(a,n,n);
+		int n,k;
+		cin>>n>>k;
 
-		int sum =0; 
+		string s;
+		cin>>s;
 
+		string cs =s+s;
+		int a[AS],pos=0,mx=INT_MIN;
 
-		for(int i=n-1;i>=0;i--){
-			for(int j=n-1;j>=0;j--){
-				int A = a[i][j];
-				// cout<<A<<" ";
-				for(int k = 0;k<=i;k++){
-					for(int l = 0;l<=j;l++){
-
-						if(A < a[k][l]){
-							sum++;
-						}
-					}
-				}
+		a[0] = cs[0]-'0';
+		for(int i=1;i<2*n-1;i++){
+			if(cs[i]=='1'){
+				a[i]=a[i-1]+1;
 			}
-		}
-		
-		cout<<sum<<endl;
-	}
+			else
+				a[i]=0;
 
+			if(a[i]>mx){
+				mx=a[i];
+				pos=i-a[i]+1;
+			}
+
+		}
+		P(a,2*n-1)
+
+		if(a.find(as))
+
+			int ans = pos + ((s.length())* (k-1));
+		cout<<ans<<endl;
+	}
+	// 111100
 
 	return 0;
 }
