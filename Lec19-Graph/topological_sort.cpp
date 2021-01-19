@@ -76,7 +76,7 @@ public:
 
 		// 1. set up indegree
 		for(auto node:h){
-			// Iteragte over the children and update their indegree
+			// Iterate over the children and update their indegree
 			for(auto children:node.si){
 				indegree[children] ++;
 			}
@@ -120,7 +120,9 @@ int main(){
 		g.addEdge(x,y);
 	}
 	
+	cout<<"DFS";
 	g.tps_dfs();
+	cout<<"BFS";
 	g.tps_bfs();
 	return 0;
 }
