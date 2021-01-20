@@ -1,6 +1,6 @@
 5
-Jatin Putin
-Nitin Jatin
-Nitin Kittin
-Kittin Jatin
-Putin Nitin
+1 2
+2 3
+3 4
+2 1
+4 3

@@ -1,5 +1,4 @@
-// EAGLE1.cpp
-// https://cp-algorithms.com/graph/depth-first-search.html
+// codeAegon.cpp
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -21,37 +20,6 @@ using namespace std;
 #define AS 200001
 #define mod 1000000007
 
-ll height[AS];
-ll dist[AS];
-
-template<typename T>
-class Graph {
-	unordered_map<T, list<ppi>> h;
-public:
-	void addEdge(T u, T v, ll w, bool bidir = true) {
-		h[u].pb({v, w});
-		h[v].pb({u, w});
-	}
-
-	void dfs_height(ll u, ll p) {
-
-		ll mx = 0;
-
-		for (auto node : h[u]) {
-			int v  = node.fi;
-			int w  = node.si;
-			if (v != p) {
-				dfs_height(v, u);
-				mx = max(mx, (height[v] + w));
-			}
-		}
-		height[u] = mx;
-	}
-
-	void dfs_dist(ll u, ll p){}
-};
-
-
 int main() {
 
 	fastIO
@@ -61,32 +29,16 @@ int main() {
 	freopen("output.txt", "w", stdout);
 #endif
 
-	int t;
-	cin >> t;
+	//	int t;
+	//	cin>>t;
 
-	while (t--) {
+	// while(t--){
 
-		int n;
-		cin >> n;
+	//	}
 
-		Graph<ll> g;
-
-		memset(height, 0, sizeof height);
-		memset(dist, 0, sizeof dist);
-
-		for (int i = 0; i < n - 1; i++) {
-			ll a, b, w;
-			cin >> a >> b >> w;
-			g.addEdge(a, b, w);
-		}
-
-		g.dfs_height(1, -1);
-
-		
-		P1(height,n);
-	}
 
 
 	return 0;
 }
+
 

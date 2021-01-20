@@ -1,5 +1,5 @@
-// EAGLE1.cpp
-// https://cp-algorithms.com/graph/depth-first-search.html
+// KefaAndPark.cpp
+// https://codeforces.com/problemset/problem/580/C
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -19,36 +19,47 @@ using namespace std;
 #define PNF(a,n,m) for(int i=0;i<n;i++){for(int j=0;j<m;j++){cout<<a[i][j]<<' ';}cout<<endl;}cout<<endl;
 #define PNF1(a,n,m) for(int i=1;i<=n;i++){for(int j=1;j<=m;j++){cout<<a[i][j]<<' ';}cout<<endl;}cout<<endl;
 #define AS 200001
+#define MAXN 100005
 #define mod 1000000007
 
-ll height[AS];
-ll dist[AS];
+int CAT[MAXN];
+
+int n, k, ans = 0;
 
 template<typename T>
 class Graph {
-	unordered_map<T, list<ppi>> h;
+	unordered_map<T, list<T> > h;
+
 public:
-	void addEdge(T u, T v, ll w, bool bidir = true) {
-		h[u].pb({v, w});
-		h[v].pb({u, w});
+	void addEdge(T u, T v, bool bidir = true) {
+		h[u].pb(v);
+		if (bidir)
+			h[v].pb(u);
 	}
 
-	void dfs_height(ll u, ll p) {
+	void dfs(int u, int p, int cats) {
 
-		ll mx = 0;
+		// check karo CAT HAI YA NHI AGAR HAI TOH ADD KARDO PICHLE CONSECUTIVE CATS MEIN 
+		if (CAT[u])
+			cats++;
+		else
+			cats = 0; // AGAR NHI TOH 0 kyuki Consecutive check karni hai 
 
-		for (auto node : h[u]) {
-			int v  = node.fi;
-			int w  = node.si;
-			if (v != p) {
-				dfs_height(v, u);
-				mx = max(mx, (height[v] + w));
+		if (cats > k) { return; }	// AGAR CAT ZAYDA HEIN TOH RETURN 
+
+		if (h[u].size() == 1 && u != 1) {
+			ans++;  //ANS increment by 1 kyuki yeh leaf node hai
+			return;
+		}
+
+		for (auto v : h[u]) {
+			if (v != p ) {
+				dfs(v, u, cats);
 			}
 		}
-		height[u] = mx;
-	}
 
-	void dfs_dist(ll u, ll p){}
+
+	}
 };
 
 
@@ -61,30 +72,26 @@ int main() {
 	freopen("output.txt", "w", stdout);
 #endif
 
-	int t;
-	cin >> t;
+	//	int t;
+	//	cin>>t;
 
-	while (t--) {
+	// while(t--){
 
-		int n;
-		cin >> n;
+	//	}
+	cin >> n >> k;
+	F1(CAT, n);
 
-		Graph<ll> g;
+	Graph<int> g;
 
-		memset(height, 0, sizeof height);
-		memset(dist, 0, sizeof dist);
-
-		for (int i = 0; i < n - 1; i++) {
-			ll a, b, w;
-			cin >> a >> b >> w;
-			g.addEdge(a, b, w);
-		}
-
-		g.dfs_height(1, -1);
-
-		
-		P1(height,n);
+	for (int i = 0; i < n - 1; i++) {
+		int a, b;
+		cin >> a >> b;
+		g.addEdge(a, b);
 	}
+
+	g.dfs(1, -1, CAT[0]);
+	cout << ans;
+
 
 
 	return 0;
