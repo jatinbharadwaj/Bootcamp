@@ -83,10 +83,19 @@ int get_min_opration(int arr[], int N,
 // Driver Program
 int main()
 {
-	int N = 4, K = 4;
+	// int N = 4, K = 4;
 
-	int arr[] = { 1,3,3,1};
-	cout << get_min_opration(arr, N, K);
+	// int arr[] = { 1,3,3,1};
+	// cout << get_min_opration(arr, N, K);
+
+	// float A = 3, B = 17;
+	// float d = ceil(float(B/A));
+	// float w = ceil(float(d/5));
+	int a=3,b=17;
+	int d = b/a + (b%a>0?1:0);
+	int w = d/5 + (d%5>0?1:0); 
+	cout<<d<<"here "<<w;
+
 
 	return 0;
 }
