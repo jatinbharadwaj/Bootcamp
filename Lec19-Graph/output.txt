@@ -1,8 +1,1 @@
-0 is connected to: 1
-0 is connected to: 7
-2 is connected to: 5
-2 is connected to: 3
-3 is connected to: 4
-6 is connected to: 5
-7 is connected to: 6
-8 is connected to: 2
+21
